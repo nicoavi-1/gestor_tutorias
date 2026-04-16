@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block title %}Estudiantes | Gestor de Tutorías{% endblock %}
+
+{% block content %}
+<section class="mb-4">
+    <div class="page-header-card">
+        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
+            <div>
+                <span class="hero-badge">Panel de estudiantes</span>
+                <h1 class="dashboard-title mt-3 mb-2">Estudiantes</h1>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+                <div class="metric-mini-card">
+                    <span class="metric-mini-label">Total</span>
+                    <strong class="metric-mini-value">{{ total_estudiantes }}</strong>
+                </div>
+
+                <a href="{% url 'students:import_csv' %}" class="secondary-action-btn">
+                    Importar CSV
+                </a>
+
+                <a href="{% url 'students:create' %}" class="primary-action-btn">
+                    Nuevo
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mb-4">
+    <div class="content-card">
+        <h3 class="section-title">Últimas importaciones</h3>
+
+        {% if importaciones %}
+            <div class="table-responsive mt-3">
+                <table class="table custom-table align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>Archivo</th>
+                            <th>Total</th>
+                            <th>Exitosos</th>
+                            <th>Error</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in importaciones %}
+                            <tr>
+                                <td>{{ item.nombre_archivo }}</td>
+                                <td>{{ item.total_registros }}</td>
+                                <td>{{ item.registros_exitosos }}</td>
+                                <td>{{ item.registros_error }}</td>
+                                <td>{{ item.fecha_importacion|date:"d/m/Y H:i" }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="section-text mt-3 mb-0">
+                Aún no existen importaciones registradas.
+            </p>
+        {% endif %}
+    </div>
+</section>
+
+<section>
+    <div class="table-card">
+        {% if estudiantes %}
+            <div class="table-responsive">
+                <table class="table custom-table align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Curso</th>
+                            <th>RUT</th>
+                            <th>Activo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for estudiante in estudiantes %}
+                            <tr>
+                                <td>{{ estudiante.nombres }}</td>
+                                <td>{{ estudiante.apellidos }}</td>
+                                <td>{{ estudiante.curso }}</td>
+                                <td>{{ estudiante.rut|default:"-" }}</td>
+                                <td>
+                                    {% if estudiante.activo %}
+                                        <span class="status-badge status-active">Sí</span>
+                                    {% else %}
+                                        <span class="status-badge status-inactive">No</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <a href="{% url 'students:update' estudiante.id %}" class="table-action-btn">
+                                            Editar
+                                        </a>
+
+                                        <a href="{% url 'tutoring:create' %}?student={{ estudiante.id }}" class="table-action-btn">
+                                            Registrar tutoría
+                                        </a>
+
+                                        <a href="{% url 'tutoring:list' estudiante.id %}" class="table-action-btn">
+                                            Ver tutorías
+                                        </a>
+
+                                        <a href="{% url 'students:delete' estudiante.id %}" class="table-delete-btn">
+                                            Eliminar
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <h3 class="section-title">Aún no hay estudiantes</h3>
+                <p class="section-text mb-0">
+                    Crea estudiantes manualmente o usa la importación CSV.
+                </p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Importar CSV | Gestor de Tutorías{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="content-card">
+            <span class="hero-badge">Importación masiva</span>
+            <h1 class="dashboard-title mt-3">Importar estudiantes desde CSV</h1>
+            <p class="dashboard-text mt-3">
+                Sube un archivo CSV con los encabezados requeridos para crear estudiantes asociados a tu cuenta.
+            </p>
+
+            <div class="csv-guide-card mt-4">
+                <h3 class="section-title">Columnas requeridas</h3>
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                    {% for columna in columnas_requeridas %}
+                        <span class="info-pill">{{ columna }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="csv-guide-card mt-4">
+                <h3 class="section-title">Ejemplo de encabezado</h3>
+                <p class="section-text mt-3 mb-0 csv-example-text">
+                    nombres,apellidos,rut,curso,correo_apoderado,telefono_apoderado,observaciones
+                </p>
+            </div>
+
+            <form method="post" enctype="multipart/form-data" class="mt-4">
+                {% csrf_token %}
+
+                <div class="mb-4">
+                    <label class="form-label custom-label">Archivo CSV</label>
+                    {{ form.archivo }}
+                </div>
+
+                <div class="d-flex gap-2 flex-wrap">
+                    <button type="submit" class="primary-action-btn">
+                        Importar archivo
+                    </button>
+
+                    <a href="{% url 'students:list' %}" class="secondary-action-btn">
+                        Volver al listado
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

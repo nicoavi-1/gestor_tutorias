@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ titulo }} | Gestor de Tutorías{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="content-card">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <span class="hero-badge">{{ titulo }}</span>
+                    <h1 class="dashboard-title mt-3">{{ titulo }}</h1>
+                </div>
+            </div>
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label custom-label">Nombres</label>
+                        {{ form.nombres }}
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label custom-label">Apellidos</label>
+                        {{ form.apellidos }}
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label custom-label">RUT</label>
+                        {{ form.rut }}
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label custom-label">Curso</label>
+                        {{ form.curso }}
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label custom-label">Correo apoderado</label>
+                        {{ form.correo_apoderado }}
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label custom-label">Teléfono apoderado</label>
+                        {{ form.telefono_apoderado }}
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label custom-label">Observaciones</label>
+                        {{ form.observaciones }}
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-check mt-2">
+                            {{ form.activo }}
+                            <label class="form-check-label ms-2">
+                                Estudiante activo
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-2 mt-4 flex-wrap">
+                    <button type="submit" class="primary-action-btn">
+                        Guardar
+                    </button>
+
+                    <a href="{% url 'students:list' %}" class="secondary-action-btn">
+                        Volver al listado
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

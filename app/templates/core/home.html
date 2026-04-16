@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio | Gestor de Tutorías{% endblock %}
+
+{% block content %}
+<section class="hero-section mb-5">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+            <div class="hero-card">
+                <span class="hero-badge">Proyecto académico y funcional</span>
+                <h1 class="hero-title mt-3">
+                    Gestor de Tutorías Individuales
+                </h1>
+                <p class="hero-text mt-3">
+                    Plataforma orientada al acompañamiento tutorial de estudiantes,
+                    con acceso por profesor, registro organizado de estudiantes
+                    y futura incorporación de entrevistas tutoriales estructuradas.
+                </p>
+                <div class="d-flex flex-wrap gap-2 mt-4">
+                    <span class="info-pill">Django</span>
+                    <span class="info-pill">PostgreSQL</span>
+                    <span class="info-pill">Docker</span>
+                    <span class="info-pill">Bootstrap + CSS</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="summary-card">
+                <h2 class="summary-title">Estado actual</h2>
+                <ul class="summary-list mt-3">
+                    <li>Estructura base del sistema lista</li>
+                    <li>Autenticación funcionando</li>
+                    <li>CRUD de estudiantes implementado</li>
+                    <li>Importación CSV en ajuste</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="row g-4">
+    <div class="col-md-4">
+        <div class="feature-card h-100">
+            <h3 class="feature-title">Profesores</h3>
+            <p class="feature-text">
+                Cada docente trabaja con su propia cuenta y visualiza solamente su información.
+            </p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="feature-card h-100">
+            <h3 class="feature-title">Estudiantes</h3>
+            <p class="feature-text">
+                El sistema permite crear, editar y organizar fichas individuales por profesor.
+            </p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="feature-card h-100">
+            <h3 class="feature-title">Tutorías</h3>
+            <p class="feature-text">
+                La siguiente etapa incorporará entrevistas y seguimiento según tu modelo tutorial.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

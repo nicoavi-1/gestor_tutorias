@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Ingresar | Gestor de Tutorías{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-5">
+        <div class="login-card">
+            <div class="text-center mb-4">
+                <span class="hero-badge">Acceso al sistema</span>
+                <h1 class="login-title mt-3">Iniciar sesión</h1>
+                <p class="login-text mt-2">
+                    Ingresa con tu cuenta para administrar estudiantes y tutorías.
+                </p>
+            </div>
+
+            <form method="post" novalidate>
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="{{ form.username.id_for_label }}" class="form-label custom-label">
+                        {{ form.username.label }}
+                    </label>
+                    {{ form.username }}
+                </div>
+
+                <div class="mb-4">
+                    <label for="{{ form.password.id_for_label }}" class="form-label custom-label">
+                        {{ form.password.label }}
+                    </label>
+                    {{ form.password }}
+                </div>
+
+                <button type="submit" class="primary-action-btn w-100">
+                    Ingresar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

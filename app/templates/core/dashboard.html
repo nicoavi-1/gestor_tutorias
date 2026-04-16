@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Panel principal | Gestor de Tutorías{% endblock %}
+
+{% block content %}
+<section class="mb-5">
+    <div class="dashboard-header-card">
+        <div>
+            <span class="hero-badge">Panel docente</span>
+            <h1 class="dashboard-title mt-3">
+                Bienvenido, {{ user.get_full_name|default:user.username }}
+            </h1>
+            <p class="dashboard-text mt-2">
+                Desde aquí podrás gestionar estudiantes, revisar el avance del sistema
+                y continuar con las siguientes etapas del proyecto.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="row g-4">
+    <div class="col-md-6 col-xl-4">
+        <div class="metric-card">
+            <p class="metric-label">Estudiantes registrados</p>
+            <h2 class="metric-value">{{ total_estudiantes }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-4">
+        <div class="metric-card">
+            <p class="metric-label">Importaciones registradas</p>
+            <h2 class="metric-value">{{ total_importaciones }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-12 col-xl-4">
+        <div class="metric-card">
+            <p class="metric-label">Siguiente paso</p>
+            <h2 class="metric-value metric-value-text">Tutorías e integración</h2>
+        </div>
+    </div>
+</section>
+
+<section class="row g-4 mt-1">
+    <div class="col-lg-8">
+        <div class="content-card">
+            <h3 class="section-title">Avance del proyecto</h3>
+            <p class="section-text">
+                Ya está operativa la estructura principal con autenticación, panel base,
+                navegación y módulo inicial de estudiantes.
+            </p>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="content-card">
+            <h3 class="section-title">Acceso rápido</h3>
+            <div class="d-grid gap-2 mt-3">
+                <a class="primary-action-btn" href="{% url 'students:list' %}">
+                    Ver estudiantes
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

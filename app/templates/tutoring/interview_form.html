@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ titulo }} Tutoría | Gestor de Tutorías{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <div class="content-card">
+            <h1 class="dashboard-title mb-4">{{ titulo }}</h1>
+
+            <form method="post" id="tutoring-form">
+                {% csrf_token %}
+
+                <div class="mb-4">
+                    <h4 class="section-title mb-3">Identificación</h4>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label custom-label">Estudiante *</label>
+                            {{ form.estudiante }}
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="form-label custom-label">Profesor</label>
+                            <input type="text" class="form-control custom-input" value="{{ user.username }}" disabled>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="form-label custom-label">Fecha *</label>
+                            {{ form.fecha }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h4 class="section-title mb-3">Lectura del caso</h4>
+
+                    <div class="mb-3">
+                        <label class="form-label custom-label">
+                            Situación trabajada * (máx. 25 palabras)
+                        </label>
+                        {{ form.situacion_trabajada }}
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label custom-label">
+                                Fase motivacional dominante *
+                            </label>
+                            {{ form.fase_motivacional_dominante }}
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label custom-label">
+                                Dimensiones trabajadas * (mín. 1, máx. 3)
+                            </label>
+
+                            <div class="border rounded p-3">
+                                <div class="form-check">
+                                    {{ form.dimension_academica }}
+                                    <label class="form-check-label ms-2" for="{{ form.dimension_academica.id_for_label }}">
+                                        Académica
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    {{ form.dimension_socioemocional }}
+                                    <label class="form-check-label ms-2" for="{{ form.dimension_socioemocional.id_for_label }}">
+                                        Socioemocional
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    {{ form.dimension_identitaria }}
+                                    <label class="form-check-label ms-2" for="{{ form.dimension_identitaria.id_for_label }}">
+                                        Identitaria
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    {{ form.dimension_vincular }}
+                                    <label class="form-check-label ms-2" for="{{ form.dimension_vincular.id_for_label }}">
+                                        Vincular
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    {{ form.dimension_proyeccion }}
+                                    <label class="form-check-label ms-2" for="{{ form.dimension_proyeccion.id_for_label }}">
+                                        Proyección
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h4 class="section-title mb-3">Intervención</h4>
+
+                    <div class="mb-3">
+                        <label class="form-label custom-label">
+                            Desarrollo de la sesión * (máx. 100 palabras)
+                        </label>
+                        {{ form.desarrollo_sesion }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label custom-label">
+                            Meta concreta * (máx. 30 palabras)
+                        </label>
+                        {{ form.meta_concreta }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label custom-label">
+                            Compromiso del tutor * (máx. 30 palabras)
+                        </label>
+                        {{ form.compromiso_tutor }}
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h4 class="section-title mb-3">Decisión profesional</h4>
+
+                    <div class="mb-3">
+                        <label class="form-label custom-label">
+                            Criterio profesional *
+                        </label>
+
+                        <div class="border rounded p-3">
+                            {{ form.criterio_profesional }}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label custom-label">
+                            Observaciones (máx. 40 palabras)
+                        </label>
+                        {{ form.observaciones }}
+                    </div>
+                </div>
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>Corrige los siguientes errores:</strong>
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="{% url 'students:list' %}" class="secondary-action-btn">
+                        Cancelar
+                    </a>
+
+                    <button type="submit" class="primary-action-btn">
+                        Guardar registro
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
